@@ -2,6 +2,7 @@ from chalice import Chalice
 from botocore.exceptions import ClientError
 import boto3
 
+
 app = Chalice(app_name='AwsRekognition-API')
 app.debug = False
 
@@ -65,6 +66,29 @@ def detect_moderation_label_in_image():
             },
             MinConfidence=70,
         )
+        for label in response['ModerationLabels']:
+            all_moderation_labels.append(
+                'Name: ' + '%s' % label['Name'] + ' ParentName: ' + '%s' % label['ParentName']
+                + ' Confidence: %' + '{:.2f}'.format(label['Confidence']))
+        return all_moderation_labels
+    except ClientError as e:
+        return {"status": "Error: %s" % e.response['Error']['Message']}
+
+
+@app.route('/detect_moderation_label_in_image_with_url')
+def detect_moderation_label_in_image_with_url():
+    url = app.current_request.query_params.get('url')
+    all_moderation_labels = []
+    photo='1.jpg'
+    try:
+        with open(photo, 'rb') as source_image:
+            source_bytes = source_image.read()
+            response = client.detect_moderation_labels(
+                Image={
+                    'Bytes': source_bytes
+                },
+                MinConfidence=70,
+            )
         for label in response['ModerationLabels']:
             all_moderation_labels.append(
                 'Name: ' + '%s' % label['Name'] + ' ParentName: ' + '%s' % label['ParentName']
