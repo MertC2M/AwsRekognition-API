@@ -77,9 +77,9 @@ def detect_moderation_label_in_image():
 
 @app.route('/detect_moderation_label_in_image_with_url')
 def detect_moderation_label_in_image_with_url():
-    url = app.current_request.query_params.get('url')
+    # url = app.current_request.query_params.get('url')
     all_moderation_labels = []
-    photo='1.jpg'
+    photo = '1.jpg'
     try:
         with open(photo, 'rb') as source_image:
             source_bytes = source_image.read()
