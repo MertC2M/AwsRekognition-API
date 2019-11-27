@@ -28,7 +28,7 @@ def detect_labels_in_image():
             all_labels.append('Label: ' + '%s' % label['Name'] + ' Confidence: ' + '%s' % label['Confidence'])
         return all_labels
     except ClientError as e:
-        return {"status": "Error: %s" % e.response['Error']['Message']}
+        return {"status": " Error: %s" % e.response['Error']['Message']}
 
 
 @app.route('/detect_texts_in_image')
