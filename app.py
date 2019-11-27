@@ -49,7 +49,7 @@ def detect_texts_in_image():
                 'DetectedText: ' + '%s' % text['DetectedText'] + ' Confidence: %' + '{:.2f}'.format(text['Confidence']))
         return all_texts
     except ClientError as e:
-        return {"status": "Error: %s" % e.response['Error']['Message']}
+        return {"status": " Error: %s" % e.response['Error']['Message']}
 
 
 @app.route('/detect_moderation_label_in_image')
@@ -72,7 +72,7 @@ def detect_moderation_label_in_image():
                 + ' Confidence: %' + '{:.2f}'.format(label['Confidence']))
         return all_moderation_labels
     except ClientError as e:
-        return {"status": "Error: %s" % e.response['Error']['Message']}
+        return {"status": " Error: %s" % e.response['Error']['Message']}
 
 
 @app.route('/detect_moderation_label_in_image_with_url')
@@ -95,7 +95,7 @@ def detect_moderation_label_in_image_with_url():
                 + ' Confidence: %' + '{:.2f}'.format(label['Confidence']))
         return all_moderation_labels
     except ClientError as e:
-        return {"status": "Error: %s" % e.response['Error']['Message']}
+        return {"status": " Error: %s" % e.response['Error']['Message']}
 
 
 @app.route('/')
